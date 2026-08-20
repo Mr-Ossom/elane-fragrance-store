@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1200" viewBox="0 0 1200 1200">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="42%" r="75%">
+      <stop offset="0%" stop-color="#e2d3c0" />
+      <stop offset="100%" stop-color="#3f2c1d" />
+    </radialGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#b8946a" />
+      <stop offset="55%" stop-color="#ffffff" stop-opacity="0.45" />
+      <stop offset="100%" stop-color="#b8946a" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="1200" fill="url(#bg)" />
+  <circle cx="600" cy="600" r="430" fill="none" stroke="#7a573a" stroke-width="2" opacity="0.55" />
+  <circle cx="600" cy="600" r="398" fill="none" stroke="#7a573a" stroke-width="1" opacity="0.35" />
+  <g filter="drop-shadow(0 24px 40px rgba(20,14,8,0.35))">
+    <rect x="470" y="500" width="260" height="220" rx="10" fill="none" stroke="#7a573a" stroke-width="3" />
+    <rect x="490" y="540" width="70" height="130" rx="10" fill="#b8946a" />
+    <rect x="585" y="540" width="70" height="130" rx="10" fill="#b8946a" />
+    <rect x="680" y="540" width="40" height="130" rx="10" fill="#b8946a" />
+    <rect x="490" y="430" width="220" height="16" rx="8" fill="#3f2c1d" />
+    <rect x="506" y="470" width="12" height="90" fill="#7a573a" />
+    <rect x="598" y="470" width="12" height="90" fill="#7a573a" />
+    <rect x="690" y="470" width="12" height="90" fill="#7a573a" /></g>
+  <text x="600" y="240" text-anchor="middle" font-family="Georgia, serif" font-size="34" letter-spacing="10" fill="#7a573a" opacity="0.9">ÉLANÉ</text>
+  <text x="600" y="970" text-anchor="middle" font-family="Georgia, serif" font-size="56" letter-spacing="4" fill="#fbf7ef" opacity="0.95">GIFT SETS</text>
+  <text x="600" y="1024" text-anchor="middle" font-family="Arial, sans-serif" font-size="21" letter-spacing="7" fill="#fbf7ef" opacity="0.6">FRAGRANCE HOUSE GHANA</text>
+</svg>

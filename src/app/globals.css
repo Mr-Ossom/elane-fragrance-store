@@ -1,0 +1,149 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-charcoal: #1c1917;
+  --color-charcoal-deep: #0e0c0a;
+  --color-ivory: #faf8f3;
+  --color-ivory-deep: #f3eee4;
+  --color-champagne: #b9935b;
+  --color-champagne-light: #d6bc93;
+  --color-champagne-deep: #966f3c;
+  --color-sand: #e6ddcd;
+  --color-espresso: #3d2c1f;
+  --color-rosewater: #f2e5dd;
+
+  --font-sans: var(--font-inter);
+  --font-serif: var(--font-cormorant);
+
+  --radius: 0.375rem;
+  --radius-sm: 0.25rem;
+  --radius-lg: 0.5rem;
+}
+
+:root {
+  --background: #faf8f3;
+  --foreground: #1c1917;
+  --card: #ffffff;
+  --card-foreground: #1c1917;
+  --popover: #ffffff;
+  --popover-foreground: #1c1917;
+  --primary: #1c1917;
+  --primary-foreground: #faf8f3;
+  --secondary: #f1ebe0;
+  --secondary-foreground: #1c1917;
+  --muted: #f1ede5;
+  --muted-foreground: #6f675d;
+  --accent: #b9935b;
+  --accent-foreground: #1c1917;
+  --destructive: #b3261e;
+  --destructive-foreground: #faf8f3;
+  --border: #e6dfd1;
+  --input: #ddd5c5;
+  --ring: #b9935b;
+}
+
+.dark {
+  --background: #131110;
+  --foreground: #f3eee4;
+  --card: #1c1917;
+  --card-foreground: #f3eee4;
+  --popover: #1c1917;
+  --popover-foreground: #f3eee4;
+  --primary: #f3eee4;
+  --primary-foreground: #1c1917;
+  --secondary: #2a2622;
+  --secondary-foreground: #f3eee4;
+  --muted: #2a2622;
+  --muted-foreground: #a89f92;
+  --accent: #c8a76a;
+  --accent-foreground: #131110;
+  --destructive: #e5484d;
+  --destructive-foreground: #faf8f3;
+  --border: #3a342d;
+  --input: #40392f;
+  --ring: #c8a76a;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-cormorant), Georgia, serif;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  ::selection {
+    background-color: var(--color-champagne);
+    color: var(--color-charcoal-deep);
+  }
+}
+
+@layer utilities {
+  .font-serif { font-family: var(--font-cormorant), Georgia, serif; }
+  .font-sans { font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif; }
+
+  .container-site {
+    margin-inline: auto;
+    max-width: 80rem;
+    padding-inline: 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .container-site { padding-inline: 2rem; }
+  }
+
+  .text-balance { text-wrap: balance; }
+
+  /* Custom scrollbar for a refined feel */
+  .scrollbar-thin::-webkit-scrollbar { width: 6px; height: 6px; }
+  .scrollbar-thin::-webkit-scrollbar-thumb { background: var(--color-sand); border-radius: 9999px; }
+  .scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
+}
+
+@layer components {
+  .text-editorial { font-family: var(--font-cormorant), Georgia, serif; }
+
+  /* Prose styling for product descriptions & admin textareas */
+  .prose-elane p { margin-block: 0.75rem; }
+  .prose-elane ul { list-style: disc; padding-left: 1.25rem; margin-block: 0.5rem; }
+  .prose-elane ol { list-style: decimal; padding-left: 1.25rem; margin-block: 0.5rem; }
+  .prose-elane strong { font-weight: 600; color: var(--color-espresso); }
+}

@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1200" viewBox="0 0 1200 1200">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="42%" r="75%">
+      <stop offset="0%" stop-color="#d9cdb8" />
+      <stop offset="100%" stop-color="#35291a" />
+    </radialGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#a18d68" />
+      <stop offset="55%" stop-color="#ffffff" stop-opacity="0.45" />
+      <stop offset="100%" stop-color="#a18d68" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="1200" fill="url(#bg)" />
+  <circle cx="600" cy="600" r="430" fill="none" stroke="#6b5634" stroke-width="2" opacity="0.55" />
+  <circle cx="600" cy="600" r="398" fill="none" stroke="#6b5634" stroke-width="1" opacity="0.35" />
+  <g filter="drop-shadow(0 24px 40px rgba(20,14,8,0.35))">
+    <rect x="516" y="420" width="168" height="330" rx="14" fill="#a18d68" />
+    <rect x="472" y="300" width="72" height="130" rx="8" fill="#a18d68" />
+    <rect x="556" y="300" width="72" height="130" rx="8" fill="#a18d68" />
+    <rect x="470" y="250" width="160" height="58" rx="10" fill="#35291a" />
+    <rect x="536" y="212" width="28" height="44" rx="6" fill="#6b5634" />
+    <path d="M548 176 L552 210 L560 210 L552 238 L544 210 L552 210" fill="none" stroke="#6b5634" stroke-width="4" />
+    <rect x="548" y="176" width="4" height="36" fill="#6b5634" />
+    <rect x="544" y="150" width="12" height="30" rx="4" fill="#35291a" />
+    <rect x="546" y="470" width="8" height="120" fill="#6b5634" opacity="0.55" />
+    <rect x="572" y="500" width="8" height="150" fill="#6b5634" opacity="0.4" />
+    <rect x="600" y="470" width="8" height="120" fill="#6b5634" opacity="0.3" /></g>
+  <text x="600" y="240" text-anchor="middle" font-family="Georgia, serif" font-size="34" letter-spacing="10" fill="#6b5634" opacity="0.9">ÉLANÉ</text>
+  <text x="600" y="970" text-anchor="middle" font-family="Georgia, serif" font-size="56" letter-spacing="4" fill="#fbf7ef" opacity="0.95">Shaghaf Oud</text>
+  <text x="600" y="1024" text-anchor="middle" font-family="Arial, sans-serif" font-size="21" letter-spacing="7" fill="#fbf7ef" opacity="0.6">FRAGRANCE HOUSE GHANA</text>
+</svg>
