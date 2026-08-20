@@ -53,7 +53,7 @@ export function SortSelect({
         <ul
           role="listbox"
           aria-label="Sort products"
-          className="absolute right-0 top-full z-30 mt-1.5 w-56 rounded-sm border border-border bg-card py-1 shadow-xl"
+          className="absolute right-0 top-full z-50 mt-1.5 max-h-[60vh] w-56 overflow-y-auto rounded-sm border border-border bg-card py-1 shadow-xl"
         >
           {options.map((option) => (
             <li key={option.value} role="option" aria-selected={value === option.value}>
