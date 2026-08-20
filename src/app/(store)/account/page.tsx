@@ -26,5 +26,17 @@ export default async function AccountPage() {
   const orders = await getOrdersByUser(user.id);
   const fullName = (user.user_metadata?.full_name as string | undefined) ?? "";
 
-  return <AccountOverview user={{ id: user.id, email: user.email ?? "", fullName }} orders={orders} />;
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("role")
+    .eq("id", user.id)
+    .single();
+
+  return (
+    <AccountOverview
+      user={{ id: user.id, email: user.email ?? "", fullName }}
+      orders={orders}
+      role={profile?.role}
+    />
+  );
 }

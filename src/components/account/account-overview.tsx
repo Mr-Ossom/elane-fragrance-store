@@ -10,6 +10,7 @@ import {
   MapPin,
   Package,
   Save,
+  ShieldCheck,
   Star,
   UserRound,
 } from "lucide-react";
@@ -26,6 +27,7 @@ import { cn } from "@/lib/utils";
 interface AccountOverviewProps {
   user: { id: string; email: string; fullName: string };
   orders: Order[];
+  role?: string;
 }
 
 const orderStatusLabels: Record<Order["orderStatus"], string> = {
@@ -38,7 +40,7 @@ const orderStatusLabels: Record<Order["orderStatus"], string> = {
   cancelled: "Cancelled",
 };
 
-export function AccountOverview({ user, orders }: AccountOverviewProps) {
+export function AccountOverview({ user, orders, role }: AccountOverviewProps) {
   const router = useRouter();
   const [fullName, setFullName] = React.useState(user.fullName);
   const [phone, setPhone] = React.useState("");
@@ -119,6 +121,15 @@ export function AccountOverview({ user, orders }: AccountOverviewProps) {
               <MapPin size={16} strokeWidth={1.5} />
               Addresses
             </Link>
+            {role === "admin" && (
+              <Link
+                href="/admin"
+                className="flex items-center gap-2.5 rounded-sm px-3 py-2.5 text-sm text-champagne-deep transition-colors hover:bg-secondary"
+              >
+                <ShieldCheck size={16} strokeWidth={1.5} />
+                Admin
+              </Link>
+            )}
             {isSupabaseConfigured && (
               <button
                 type="button"

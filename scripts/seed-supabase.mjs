@@ -11,15 +11,26 @@
  *
  * Safe to re-run: categories/zones/coupons/products upsert by key.
  */
-import "dotenv/config";
 import { readFileSync, existsSync } from "node:fs";
+
+try {
+  for (const file of [".env", ".env.local"]) {
+    if (existsSync(file)) {
+      const env = readFileSync(file, "utf8");
+      for (const line of env.split("\n")) {
+        const [k, ...rest] = line.trim().split("=");
+        if (k && !process.env[k]) process.env[k] = rest.join("=").replace(/^["']|["']$/g, "");
+      }
+    }
+  }
+} catch {}
 
 const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
 if (!url || !key) {
   console.error(
-    "Missing NEXT_PUBLIC_SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY in .env.local"
+    "Missing NEXT_PUBLIC_SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY in .env or .env.local"
   );
   process.exit(1);
 }
@@ -121,21 +132,17 @@ const products = [
   },
 ];
 
-try {
-  if (existsSync(".env.local")) {
-    const env = readFileSync(".env.local", "utf8");
-    for (const line of env.split("\n")) {
-      const [k, ...rest] = line.trim().split("=");
-      if (k && !process.env[k]) process.env[k] = rest.join("=").replace(/^["']|["']$/g, "");
-    }
-    void 0;
-  }
-} catch {}
+const seedProducts = !process.argv.includes("--no-products");
 
 console.log("Seeding Supabase…");
 await upsert("product_categories", categories);
 await upsert("delivery_zones", zones);
 await upsert("coupons", coupons);
+
+if (!seedProducts) {
+  console.log("\nSkipping products (--no-products). Storefront catalog stays empty.");
+  process.exit(0);
+}
 
 for (const p of products) {
   const { variants, images, ...product } = p;
