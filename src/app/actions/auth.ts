@@ -21,10 +21,14 @@ export async function signInAction(email: string, password: string) {
   if (!isSupabaseConfigured) return authNotConfigured();
   const parsed = emailSchema.safeParse(email);
   if (!parsed.success) return { ok: false, error: "Please enter a valid email address." } as const;
-  const supabase = await createServerClient();
-  const { error } = await supabase.auth.signInWithPassword({ email, password });
-  if (error) return { ok: false, error: "Invalid email or password." } as const;
-  return { ok: true, error: null } as const;
+  try {
+    const supabase = await createServerClient();
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    if (error) return { ok: false, error: "Invalid email or password." } as const;
+    return { ok: true, error: null } as const;
+  } catch {
+    return { ok: false, error: "Something went wrong signing in. Please try again." } as const;
+  }
 }
 
 export async function signUpAction(input: z.infer<typeof signUpSchema>) {
@@ -33,24 +37,28 @@ export async function signUpAction(input: z.infer<typeof signUpSchema>) {
   if (!parsed.success) {
     return { ok: false, error: parsed.error.issues[0]?.message ?? "Please check your details." } as const;
   }
-  const supabase = await createServerClient();
-  const { data, error } = await supabase.auth.signUp({
-    email: parsed.data.email,
-    password: parsed.data.password,
-    options: {
-      data: { full_name: parsed.data.name },
-      emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"}/auth/callback`,
-    },
-  });
-  if (error) return { ok: false, error: error.message } as const;
-  if (data.session && data.user) {
-    await upsertProfile(data.user.id, parsed.data.name, parsed.data.email);
+  try {
+    const supabase = await createServerClient();
+    const { data, error } = await supabase.auth.signUp({
+      email: parsed.data.email,
+      password: parsed.data.password,
+      options: {
+        data: { full_name: parsed.data.name },
+        emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"}/auth/callback`,
+      },
+    });
+    if (error) return { ok: false, error: error.message } as const;
+    if (data.session && data.user) {
+      await upsertProfile(data.user.id, parsed.data.name, parsed.data.email);
+    }
+    return {
+      ok: true,
+      needsEmailConfirmation: !data.session,
+      error: null,
+    } as const;
+  } catch {
+    return { ok: false, error: "Something went wrong creating your account. Please try again." } as const;
   }
-  return {
-    ok: true,
-    needsEmailConfirmation: !data.session,
-    error: null,
-  } as const;
 }
 
 export async function resetPasswordAction(email: string) {
@@ -82,7 +90,7 @@ export async function updatePasswordAction(newPassword: string) {
   return { ok: true, error: null } as const;
 }
 
-export const profileSchema = z.object({
+const profileSchema = z.object({
   fullName: z.string().trim().min(2).max(100),
   phone: z.string().trim().max(20).optional().or(z.literal("")),
 });

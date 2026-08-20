@@ -16,17 +16,9 @@ import {
   uploadProductImageAdmin,
 } from "@/lib/data-access/admin-store";
 import { updateOrderStatusSupabase } from "@/lib/data-access/supabase-store";
+import { ORDER_STATUSES } from "@/lib/order-status";
 import type { Gender, FragranceFamily, Order } from "@/types";
 
-export const ORDER_STATUSES: Order["orderStatus"][] = [
-  "pending",
-  "payment_confirmed",
-  "processing",
-  "ready_for_delivery",
-  "out_for_delivery",
-  "delivered",
-  "cancelled",
-];
 
 export async function adminUpdateOrderStatus(orderId: string, orderStatus: Order["orderStatus"]) {
   if (!ORDER_STATUSES.includes(orderStatus)) return { ok: false, error: "Invalid status" };

@@ -22,14 +22,19 @@ export function LoginForm({ redirect }: { redirect: string }) {
     e.preventDefault();
     setError("");
     setLoading(true);
-    const result = await signInAction(email, password);
-    setLoading(false);
-    if (!result.ok) {
-      setError(result.error);
-      return;
+    try {
+      const result = await signInAction(email, password);
+      if (!result.ok) {
+        setError(result.error);
+        return;
+      }
+      router.push(redirect);
+      router.refresh();
+    } catch {
+      setError("Something went wrong signing in. Please try again.");
+    } finally {
+      setLoading(false);
     }
-    router.push(redirect);
-    router.refresh();
   }
 
   return (

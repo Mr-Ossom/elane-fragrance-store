@@ -1,5 +1,15 @@
 import type { OrderStatus } from "@/types";
 
+export const ORDER_STATUSES: OrderStatus[] = [
+  "pending",
+  "payment_confirmed",
+  "processing",
+  "ready_for_delivery",
+  "out_for_delivery",
+  "delivered",
+  "cancelled",
+];
+
 export interface OrderStage {
   key: OrderStatus;
   label: string;

@@ -29,17 +29,24 @@ export function RegisterForm() {
       return;
     }
     setLoading(true);
-    const result = await signUpAction({ name, email, password });
-    setLoading(false);
-    if (!result.ok) {
-      setError(result.error);
-      return;
-    }
-    if (result.needsEmailConfirmation) {
-      setNotice("Almost there! Check your inbox to confirm your email address, then sign in.");
-    } else {
-      router.push("/account");
-      router.refresh();
+    try {
+      const result = await signUpAction({ name, email, password });
+      if (!result.ok) {
+        setError(result.error);
+        return;
+      }
+      if (result.needsEmailConfirmation) {
+        setNotice(
+          `Almost there! Check ${email} for a confirmation link, then sign in. (Check spam if you don't see it.)`
+        );
+      } else {
+        router.push("/account");
+        router.refresh();
+      }
+    } catch {
+      setError("Something went wrong creating your account. Please try again.");
+    } finally {
+      setLoading(false);
     }
   }
 

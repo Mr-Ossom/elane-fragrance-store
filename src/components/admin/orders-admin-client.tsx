@@ -2,7 +2,8 @@
 
 import * as React from "react";
 import { Loader2 } from "lucide-react";
-import { ORDER_STATUSES, adminUpdateOrderStatus } from "@/app/actions/admin";
+import { ORDER_STATUSES } from "@/lib/order-status";
+import { adminUpdateOrderStatus } from "@/app/actions/admin";
 import { orderStatusLabel } from "@/lib/order-status";
 import { formatPrice, formatDateTime } from "@/lib/format";
 import { Badge } from "@/components/ui/badge";
